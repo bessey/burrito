@@ -3,11 +3,16 @@ defmodule Burrito.PhoenixDigestTask do
 
   def before_assembly(%Release{} = _release) do
     info "before assembly!"
-    case System.cmd("yarn", ["run", "deploy"]) do
+    case System.cmd("yarn", ["install"], cd: "assets/") do
       {output, 0} ->
-        info output
-        Mix.Task.run("phoenix.digest")
-        nil
+        case System.cmd("yarn", ["run", "deploy"], cd: "assets/") do
+          {output, 0} ->
+            info output
+            Mix.Task.run("phoenix.digest")
+            nil
+          {output, error_code} ->
+            {:error, output, error_code}
+        end
       {output, error_code} ->
         {:error, output, error_code}
     end
