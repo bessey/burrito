@@ -71,8 +71,5 @@ config :burrito_web, BurritoWeb.Endpoint,
 # Configure your database
 config :burrito, Burrito.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: System.get_env("DATABASE_USERNAME"),
-  password: System.get_env("DATABASE_PASSWORD"),
-  database: "burrito_prod",
-  hostname: System.get_env("DATABASE_HOST"),
+  url: System.get_env("DATABASE_URL"),
   pool_size: 20
