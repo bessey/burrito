@@ -22,7 +22,7 @@ sudo apt-get install postgresql postgresql-contrib
 sudo -u postgres createuser web -P
 # web
 sudo -u postgres createdb web
-sudo -u postgres createdb burrito_web_prod
+sudo -u postgres createdb burrito_prod
 
 # Deploy setup
 sudo mkdir /home/web/.ssh/
