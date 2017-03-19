@@ -1,19 +1,19 @@
 APP="burrito"
 
-BUILD_HOST="104.197.46.34"
+BUILD_HOST="hack.bessey.io"
 BUILD_USER="matt"
 BUILD_AT="/home/$BUILD_USER/edeliver/$APP"
 
 RELEASE_DIR="$BUILD_AT/_build/prod/rel/$APP"
 
-PRODUCTION_HOSTS="104.197.46.34"
+PRODUCTION_HOSTS="hack.bessey.io"
 PRODUCTION_USER="web"
 
 DELIVER_TO="/home/$PRODUCTION_USER/deploy/$APP"
 
 pre_erlang_clean_compile() {
   status "Running phoenix.digest with default directories"
-  __sync_remote " # runs the commands on the build host
+  __sync_remote "
     [ -f ~/.profile ] && source ~/.profile # load profile (optional)
     set -e # fail if any command fails (recommended)
     cd '$BUILD_AT' # enter the build directory on the build host (required)
