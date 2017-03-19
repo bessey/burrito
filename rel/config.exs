@@ -39,7 +39,7 @@ end
 # will be used by default
 
 release :burrito do
-  set version: current_version(:burrito_master)
+  set version: "0.1.0"
   set applications: [
     burrito_master: :permanent,
     burrito_backend: :permanent,
