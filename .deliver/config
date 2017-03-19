@@ -1,26 +1,21 @@
-APP="buritto"
+APP="buritto_master"
 
 BUILD_HOST="104.197.46.34"
 BUILD_USER="matt"
-BUILD_AT="/tmp/edeliver/buritto/builds"
+BUILD_AT="/home/$BUILD_USER/edeliver/$APP/builds"
 
-STAGING_HOSTS="stage.buritto.com"
-STAGING_USER="web"
-DELIVER_TO="/home/web"
-RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
+RELEASE_DIR="$BUILD_AT/rel/$APP"
 
-# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
-pre_erlang_get_and_update_deps() {
-  local _prod_secret_path="/home/matt/prod.secret.exs"
-  if [ "$TARGET_MIX_ENV" = "prod" ]; then
-    __sync_remote "
-      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
-    "
-  fi
-}
+STAGING_HOSTS="104.197.46.34"
+STAGING_USER="matt"
+
+# PRODUCTION_HOSTS="104.197.46.34"
+# PRODUCTION_USER="matt"
+
+DELIVER_TO="/home/$STAGING_USER/deploy/$APP"
 
 post_erlang_clean_compile() {
-  [[ "$APP" = "burrito" ]] && prepare_projects_in_umbrella
+  [[ "$APP" = "burrito_master" ]] && prepare_projects_in_umbrella
 }
 
 prepare_projects_in_umbrella() {

@@ -8,7 +8,7 @@ Path.join(["rel", "plugins", "*.exs"])
 
 use Mix.Releases.Config,
     # This sets the default release built by `mix release`
-    default_release: :default,
+    default_release: :burrito,
     # This sets the default environment used by `mix release`
     default_environment: Mix.env()
 
@@ -41,8 +41,21 @@ end
 release :burrito do
   set version: "0.1.0"
   set applications: [
+    burrito_master: :permanent,
     burrito_backend: :permanent,
-    burrito_web: :permanent
+    burrito_web: :permanent,
   ]
 end
 
+
+release :burrito_web do
+  set version: current_version(:burrito_web)
+end
+
+release :burrito_backend do
+  set version: current_version(:burrito_backend)
+end
+
+release :burrito_master do
+  set version: current_version(:burrito_master)
+end
