@@ -28,6 +28,7 @@ environment :dev do
 end
 
 environment :prod do
+  set plugins: [PhoenixApp.PhoenixDigestTask]
   set include_erts: true
   set include_src: false
   set cookie: :"oenf>Xxph!A}vA`JJ=NQ7!mjMqllVYO>)&4sdp[&`?;3Gh01W[Fb/!orKPjm(k{s"

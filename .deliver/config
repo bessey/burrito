@@ -9,3 +9,5 @@ BUILD_AT="/home/$BUILD_USER/edeliver/$APP/builds"
 PRODUCTION_HOSTS="hack.bessey.io"
 PRODUCTION_USER="web"
 DELIVER_TO="/home/web"
+
+AUTO_INCREMENT="git-revision"
