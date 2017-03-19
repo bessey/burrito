@@ -7,9 +7,25 @@ BUILD_AT="/home/$BUILD_USER/edeliver/$APP"
 RELEASE_DIR="$BUILD_AT/_build/prod/rel/$APP"
 
 PRODUCTION_HOSTS="104.197.46.34"
-PRODUCTION_USER="matt"
+PRODUCTION_USER="web"
 
 DELIVER_TO="/home/$PRODUCTION_USER/deploy/$APP"
+
+pre_erlang_clean_compile() {
+  status "Running phoenix.digest with default directories"
+  __sync_remote " # runs the commands on the build host
+    [ -f ~/.profile ] && source ~/.profile # load profile (optional)
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT' # enter the build directory on the build host (required)
+    # prepare something
+    mkdir -p priv/static # required by the phoenix.digest task
+    cd $BUILD_AT/apps/$APP\_web
+    yarn install
+    ./node_modules/brunch/bin/brunch b -p
+    # run your custom task
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest # web/static -o priv/static $SILENCE
+  "
+}
 
 post_erlang_clean_compile() {
   [[ "$APP" = "burrito" ]] && prepare_projects_in_umbrella

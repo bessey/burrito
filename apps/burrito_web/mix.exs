@@ -9,6 +9,9 @@ defmodule BurritoWeb.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     config_path: "../../config/config.exs",
+     deps_path: "../../deps",
+     lockfile: "../../mix.lock",
      aliases: aliases(),
      deps: deps()]
   end
