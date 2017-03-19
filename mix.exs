@@ -17,7 +17,7 @@ defmodule Burrito.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Burrito.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :edeliver]]
   end
 
   # Specifies which paths to compile per environment.
@@ -36,6 +36,7 @@ defmodule Burrito.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
+     {:edeliver, "~> 1.4.2"},
      {:distillery, "~> 1.2"}]
   end
 

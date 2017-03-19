@@ -1,48 +1,11 @@
+# .deliver/config
+
 APP="burrito"
 
 BUILD_HOST="hack.bessey.io"
 BUILD_USER="matt"
-BUILD_AT="/home/$BUILD_USER/edeliver/$APP"
-
-RELEASE_DIR="$BUILD_AT/_build/prod/rel/$APP"
+BUILD_AT="/home/$BUILD_USER/edeliver/$APP/builds"
 
 PRODUCTION_HOSTS="hack.bessey.io"
 PRODUCTION_USER="web"
-
-DELIVER_TO="/home/$PRODUCTION_USER/deploy/$APP"
-
-AUTO_VERSION="revision"
-
-pre_erlang_clean_compile() {
-  status "Running phoenix.digest with default directories"
-  __sync_remote "
-    [ -f ~/.profile ] && source ~/.profile # load profile (optional)
-    set -e # fail if any command fails (recommended)
-    cd '$BUILD_AT' # enter the build directory on the build host (required)
-    # prepare something
-    mkdir -p priv/static # required by the phoenix.digest task
-    cd $BUILD_AT/apps/$APP\_web
-    yarn install
-    ./node_modules/brunch/bin/brunch b -p
-    # run your custom task
-    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest # web/static -o priv/static $SILENCE
-  "
-}
-
-post_erlang_clean_compile() {
-  [[ "$APP" = "burrito" ]] && prepare_projects_in_umbrella
-}
-
-prepare_projects_in_umbrella() {
-  status "Preparing projects in umbrella"
-  __sync_remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-    cd '${BUILD_AT}'
-    for UMBRELLA_APP in \$(ls -1 apps | grep -v '$APP'); do
-      echo \"Preparing \${UMBRELLA_APP} in umbrella...\" $SILENCE
-      cd \"${BUILD_AT}/apps/\${UMBRELLA_APP}\" $SILENCE
-      APP=\"\$UMBRELLA_APP\" MIX_ENV='$TARGET_MIX_ENV' mix do deps.get, compile
-    done
-  "
-}
+DELIVER_TO="/home/web"
