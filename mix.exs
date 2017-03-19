@@ -8,6 +8,12 @@ defmodule Burrito.Mixfile do
      deps: deps()]
   end
 
+  def application, do: [
+    applications: [
+      :edeliver
+    ]
+  ]
+
   # Dependencies can be Hex packages:
   #
   #   {:my_dep, "~> 0.3.0"}

@@ -6,16 +6,13 @@ BUILD_AT="/home/$BUILD_USER/edeliver/$APP"
 
 RELEASE_DIR="$BUILD_AT/_build/prod/rel/$APP"
 
-STAGING_HOSTS="104.197.46.34"
-STAGING_USER="matt"
+PRODUCTION_HOSTS="104.197.46.34"
+PRODUCTION_USER="matt"
 
-# PRODUCTION_HOSTS="104.197.46.34"
-# PRODUCTION_USER="matt"
-
-DELIVER_TO="/home/$STAGING_USER/deploy/$APP"
+DELIVER_TO="/home/$PRODUCTION_USER/deploy/$APP"
 
 post_erlang_clean_compile() {
-  [[ "$APP" = "burrito_master" ]] && prepare_projects_in_umbrella
+  [[ "$APP" = "burrito" ]] && prepare_projects_in_umbrella
 }
 
 prepare_projects_in_umbrella() {

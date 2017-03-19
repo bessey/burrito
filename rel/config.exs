@@ -41,7 +41,6 @@ end
 release :burrito do
   set version: "0.1.0"
   set applications: [
-    burrito_master: :permanent,
     burrito_backend: :permanent,
     burrito_web: :permanent,
   ]
