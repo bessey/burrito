@@ -61,6 +61,12 @@ config :phoenix, :serve_endpoints, true
 
 config :burrito_web, BurritoWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE")
+  http: [port: {:system, "PORT"}],
+  url: [host: "localhost", port: {:system, "PORT"}], # This is critical for ensuring web-sockets properly authorize.
+  cache_static_manifest: "priv/static/manifest.json",
+  server: true,
+  root: ".",
+  version: Mix.Project.config[:version]
 
 # Configure your database
 config :burrito_web, BurritoWeb.Repo,
