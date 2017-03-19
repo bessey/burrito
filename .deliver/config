@@ -10,4 +10,4 @@ PRODUCTION_HOSTS="hack.bessey.io"
 PRODUCTION_USER="web"
 DELIVER_TO="/home/web"
 
-AUTO_VERSION="git-revision"
+# AUTO_VERSION="git-revision"
