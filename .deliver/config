@@ -1,10 +1,10 @@
-APP="buritto_master"
+APP="burrito"
 
 BUILD_HOST="104.197.46.34"
 BUILD_USER="matt"
-BUILD_AT="/home/$BUILD_USER/edeliver/$APP/builds"
+BUILD_AT="/home/$BUILD_USER/edeliver/$APP"
 
-RELEASE_DIR="$BUILD_AT/rel/$APP"
+RELEASE_DIR="$BUILD_AT/_build/prod/rel/$APP"
 
 STAGING_HOSTS="104.197.46.34"
 STAGING_USER="matt"

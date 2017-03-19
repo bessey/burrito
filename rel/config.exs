@@ -46,16 +46,3 @@ release :burrito do
     burrito_web: :permanent,
   ]
 end
-
-
-release :burrito_web do
-  set version: current_version(:burrito_web)
-end
-
-release :burrito_backend do
-  set version: current_version(:burrito_backend)
-end
-
-release :burrito_master do
-  set version: current_version(:burrito_master)
-end

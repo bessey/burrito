@@ -4,7 +4,6 @@ defmodule BurritoMaster.Mixfile do
   def project do
     [app: :burrito_master,
      version: append_revision("0.0.1"),
-     build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
      lockfile: "../../mix.lock",
