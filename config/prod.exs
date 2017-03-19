@@ -60,7 +60,7 @@ config :phoenix, :serve_endpoints, true
 #
 
 config :burrito_web, BurritoWeb.Endpoint,
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   http: [port: {:system, "PORT"}],
   url: [host: "localhost", port: {:system, "PORT"}], # This is critical for ensuring web-sockets properly authorize.
   cache_static_manifest: "priv/static/manifest.json",
@@ -69,10 +69,10 @@ config :burrito_web, BurritoWeb.Endpoint,
   version: Mix.Project.config[:version]
 
 # Configure your database
-config :burrito_web, BurritoWeb.Repo,
+config :burrito, Burrito.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DATABASE_USERNAME"),
   password: System.get_env("DATABASE_PASSWORD"),
-  database: "burrito_web_prod",
+  database: "burrito_prod",
   hostname: System.get_env("DATABASE_HOST"),
   pool_size: 20
