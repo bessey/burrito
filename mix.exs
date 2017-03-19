@@ -22,7 +22,7 @@ defmodule Burrito.Mixfile do
   # and cannot be accessed from applications inside the apps folder
   defp deps do
     [
-      {:distillery, "~> 1.0"},
+      {:edeliver, "~> 1.4.2"},
       {:distillery, ">= 0.8.0", warn_missing: false}
     ]
   end

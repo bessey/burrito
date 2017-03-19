@@ -1,19 +1,38 @@
-APP="myapp"
+APP="buritto"
 
-BUILD_HOST="my-build-server.myapp.com"
-BUILD_USER="builder"
-BUILD_AT="/tmp/edeliver/myapp/builds"
+BUILD_HOST="104.197.46.34"
+BUILD_USER="matt"
+BUILD_AT="/tmp/edeliver/buritto/builds"
 
-STAGING_HOSTS="stage.myapp.com"
+STAGING_HOSTS="stage.buritto.com"
 STAGING_USER="web"
 DELIVER_TO="/home/web"
+RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
-  local _prod_secret_path="/home/builder/prod.secret.exs"
+  local _prod_secret_path="/home/matt/prod.secret.exs"
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
     __sync_remote "
       ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
     "
   fi
+}
+
+post_erlang_clean_compile() {
+  [[ "$APP" = "burrito" ]] && prepare_projects_in_umbrella
+}
+
+prepare_projects_in_umbrella() {
+  status "Preparing projects in umbrella"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '${BUILD_AT}'
+    for UMBRELLA_APP in \$(ls -1 apps | grep -v '$APP'); do
+      echo \"Preparing \${UMBRELLA_APP} in umbrella...\" $SILENCE
+      cd \"${BUILD_AT}/apps/\${UMBRELLA_APP}\" $SILENCE
+      APP=\"\$UMBRELLA_APP\" MIX_ENV='$TARGET_MIX_ENV' mix do deps.get, compile
+    done
+  "
 }

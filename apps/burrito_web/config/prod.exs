@@ -56,6 +56,14 @@ config :logger, level: :info
 #     config :burrito_web, BurritoWeb.Endpoint, server: true
 #
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
+config :burrito_web, BurritoWeb.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+# Configure your database
+config :burrito_web, BurritoWeb.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DATABASE_USERNAME"),
+  password: System.get_env("DATABASE_PASSWORD"),
+  database: "burrito_web_prod",
+  hostname: System.get_env("DATABASE_HOST"),
+  pool_size: 20

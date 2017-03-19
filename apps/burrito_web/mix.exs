@@ -3,7 +3,7 @@ defmodule BurritoWeb.Mixfile do
 
   def project do
     [app: :burrito_web,
-     version: "0.0.1",
+     version: append_revision("0.0.1"),
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -20,6 +20,16 @@ defmodule BurritoWeb.Mixfile do
     [mod: {BurritoWeb, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex]]
+  end
+
+  def append_revision(version) do
+    "#{version}+#{revision()}"
+  end
+
+  defp revision() do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
   end
 
   # Specifies which paths to compile per environment.

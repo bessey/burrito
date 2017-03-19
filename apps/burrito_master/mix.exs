@@ -1,8 +1,8 @@
-defmodule BurritoBackend.Mixfile do
+defmodule BurritoMaster.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :burrito_backend,
+    [app: :burrito_master,
      version: append_revision("0.0.1"),
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -19,18 +19,12 @@ defmodule BurritoBackend.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
-     mod: {BurritoBackend.Application, []}]
+    [extra_applications: [:logger, :edeliver],
+     mod: {BurritoMaster.Application, []}]
   end
 
   def append_revision(version) do
     "#{version}+#{revision()}"
-  end
-
-  defp revision() do
-    System.cmd("git", ["rev-parse", "--short", "HEAD"])
-    |> elem(0)
-    |> String.rstrip
   end
 
   # Dependencies can be Hex packages:
@@ -47,6 +41,15 @@ defmodule BurritoBackend.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:burrito_backend, in_umbrella: true},
+      {:burrito_web, in_umbrella: true}
+    ]
+  end
+
+  defp revision() do
+    System.cmd("git", ["rev-parse", "--short", "HEAD"])
+    |> elem(0)
+    |> String.rstrip
   end
 end
