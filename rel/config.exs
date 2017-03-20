@@ -24,14 +24,14 @@ use Mix.Releases.Config,
 environment :dev do
   set dev_mode: true
   set include_erts: false
-  set cookie: :":z3`3ExV*Io}*oDa7[)V>at&<`8p9{Z&66%)n$jq_>AZC!^|d6ktZln=,Hp3($D5"
+  set cookie: :"igtdoqpcmvbytvjlxtcsewczrqoqwpwpqmwbhohuyrbdf"
 end
 
 environment :prod do
   set plugins: [Burrito.PhoenixDigestTask]
   set include_erts: true
   set include_src: false
-  set cookie: :"oenf>Xxph!A}vA`JJ=NQ7!mjMqllVYO>)&4sdp[&`?;3Gh01W[Fb/!orKPjm(k{s"
+  set cookie: :"fguieopdfnvtdsowbgznquyqpmrysovtrwmjcdosyrn"
 end
 
 # You may define one or more releases in this file.
