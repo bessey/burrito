@@ -1,8 +1,8 @@
 defmodule Burrito.PhoenixDigestTask do
   use Mix.Releases.Plugin
 
-  def before_assembly(%Release{} = _release) do
-    info "before assembly!"
+  def before_assembly(%Release{} = _release, _opts) do
+    info "This is executed just prior to assembling the release"
     case System.cmd("yarn", ["install"], cd: "assets/") do
       {output, 0} ->
         case System.cmd("yarn", ["run", "deploy"], cd: "assets/") do
@@ -18,23 +18,23 @@ defmodule Burrito.PhoenixDigestTask do
     end
   end
 
-  def after_assembly(%Release{} = _release) do
-    info "after assembly!"
-    nil
+  def after_assembly(%Release{} = release, _opts) do
+    info "This is executed just after assembling, and just prior to packaging the release"
+    release # or nil
   end
 
-  def before_package(%Release{} = _release) do
-    info "before package!"
-    nil
+  def before_package(%Release{} = release, _opts) do
+    info "This is executed just before packaging the release"
+    release # or nil
   end
 
-  def after_package(%Release{} = _release) do
-    info "after package!"
-    nil
+  def after_package(%Release{} = release, _opts) do
+    info "This is executed just after packaging the release"
+    release # or nil
   end
 
-  def after_cleanup(%Release{} = _release) do
-    info "after cleanup!"
-    nil
+  def after_cleanup(_args, _opts) do
+    info "This is executed just after running cleanup"
+    :ok # It doesn't matter what we return here
   end
 end
